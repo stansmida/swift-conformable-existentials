@@ -57,6 +57,8 @@ struct Tap: View {
 
 ---
 
+See <doc:Essentials> to gain all the knowledge you need for the best hands-on experience.
+
 `SwiftConformableExistential` is distributed as a SwiftPM package at
 [https://github.com/stansmida/swift-conformable-existential.git](https://github.com/stansmida/swift-conformable-existential.git).
 

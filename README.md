@@ -56,3 +56,15 @@ struct Tap: View {
 ```
 
 For more, see [the documentation](http://stansmida.github.io/swift-conformable-existential/documentation/swiftconformableexistential).
+
+
+## Installation
+
+Via SwiftPM.
+
+In your package dependencies:
+`.package(url: "https://github.com/stansmida/swift-conformable-existential.git", from: "0.4.0"),`
+And in your target dependencies:
+`.product(name: "SwiftConformableExistential", package: "swift-conformable-existential"),`
+And don't forget to import in files where annotating your protocols:
+`import SwiftConformableExistential`

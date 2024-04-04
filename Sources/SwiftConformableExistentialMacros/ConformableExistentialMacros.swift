@@ -160,18 +160,18 @@ fileprivate struct Configuration {
     }
 
     enum Variant {
-        case mutable, optional, sequence
+        case mutable, optional, collection
     }
 
     static let allVariants: [Set<Variant>] = [
         [],
         [.mutable],
         [.optional],
-        [.sequence],
+        [.collection],
         [.mutable, .optional],
-        [.mutable, .sequence],
-        [.optional, .sequence],
-        [.mutable, .optional, .sequence]
+        [.mutable, .collection],
+        [.optional, .collection],
+        [.mutable, .optional, .collection]
     ]
 
     init(
@@ -248,14 +248,14 @@ private struct ExpansionBuilder {
         if configuration.variant.contains(.optional) {
             variantComponent += "Optional"
         }
-        if configuration.variant.contains(.sequence) {
-            variantComponent += "\(sequenceType)Of"
+        if configuration.variant.contains(.collection) {
+            variantComponent += "CollectionOf"
         }
         let typeName = conformanceComponent + variantComponent + configuration.protocolName
         return typeName
     }
 
-    private var sequenceType: String {
+    private var collectionType: String {
         if let codability = configuration.conformance.codability {
             codability == .encodable ? "Sequence" : "RangeReplaceableCollection"
         } else {
@@ -277,8 +277,8 @@ private struct ExpansionBuilder {
     private var genericParameterClause: String {
         var parameters = [String]()
         // Order matters.
-        if configuration.variant.contains(.sequence) {
-            parameters.append(sequenceGenericParameter)
+        if configuration.variant.contains(.collection) {
+            parameters.append(collectionGenericParameter)
         }
         if configuration.conformance.codability != nil {
             parameters.append(typeCodingGenericParameter)
@@ -290,14 +290,14 @@ private struct ExpansionBuilder {
         }
     }
 
-    private let sequenceGenericParameter = "T"
+    private let collectionGenericParameter = "C"
 
     private let typeCodingGenericParameter = "TypeCoding"
 
     private var inheritanceClause: String {
         var conformances = [String]()
         if let equality = configuration.conformance.equality {
-            if configuration.variant.contains(.sequence) {
+            if configuration.variant.contains(.collection) {
                 conformances.append("_ConformableExistentialEquatableSequenceSupport")
             } else {
                 conformances.append("_ConformableExistentialEquatableSupport")
@@ -326,8 +326,8 @@ private struct ExpansionBuilder {
 
     private var genericWhereClause: String {
         var constraints = [String]()
-        if configuration.variant.contains(.sequence) {
-            constraints.append("\(sequenceGenericParameter): \(sequenceType)<any \(configuration.protocolName)>")
+        if configuration.variant.contains(.collection) {
+            constraints.append("\(collectionGenericParameter): \(collectionType)<any \(configuration.protocolName)>")
         }
         if let codability = configuration.conformance.codability {
             let coding = switch codability {
@@ -357,8 +357,8 @@ private struct ExpansionBuilder {
         "\(raw: memberAccessModifierWithTrailingSpace)\(raw: bindingSpecifier) wrappedValue: \(raw: wrappedType)"
         "\(raw: memberAccessModifierWithTrailingSpace)var projectedValue: Self { self }"
         if let equality = configuration.conformance.equality {
-            if configuration.variant.contains(.sequence) {
-                "\(raw: memberAccessModifierWithTrailingSpace)var _sequenceOfEquatables: \(raw: sequenceGenericParameter)? { wrappedValue }"
+            if configuration.variant.contains(.collection) {
+                "\(raw: memberAccessModifierWithTrailingSpace)var _sequenceOfEquatables: \(raw: collectionGenericParameter)? { wrappedValue }"
             } else {
                 "\(raw: memberAccessModifierWithTrailingSpace)var _equatable: (any Equatable)? { wrappedValue }"
             }
@@ -393,12 +393,12 @@ private struct ExpansionBuilder {
     }
 
     private var wrappedType: String {
-        if configuration.variant.isSuperset(of: [.optional, .sequence]) {
-            "\(sequenceGenericParameter)?"
+        if configuration.variant.isSuperset(of: [.optional, .collection]) {
+            "\(collectionGenericParameter)?"
         } else if configuration.variant.isSuperset(of: [.optional]) {
             "(any \(configuration.protocolName))?"
-        } else if configuration.variant.isSuperset(of: [.sequence]) {
-            "\(sequenceGenericParameter)"
+        } else if configuration.variant.isSuperset(of: [.collection]) {
+            "\(collectionGenericParameter)"
         } else {
             "any \(configuration.protocolName)"
         }
@@ -409,7 +409,7 @@ private struct ExpansionBuilder {
     }
 
     private var hashIntoHasherBody: CodeBlockItemListSyntax {
-        switch (configuration.variant.contains(.optional), configuration.variant.contains(.sequence)) {
+        switch (configuration.variant.contains(.optional), configuration.variant.contains(.collection)) {
             case (false, false):
                 """
                 hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
@@ -417,7 +417,7 @@ private struct ExpansionBuilder {
                 """
             case (false, true):
                 """
-                hasher.combine(ObjectIdentifier(\(raw: sequenceGenericParameter).self))
+                hasher.combine(ObjectIdentifier(\(raw: collectionGenericParameter).self))
                 for element in wrappedValue {
                     hasher.combine(ObjectIdentifier(type(of: element)))
                     hasher.combine(element)
@@ -435,20 +435,20 @@ private struct ExpansionBuilder {
             case (true, true):
                 """
                 if let wrappedValue {
-                    hasher.combine(ObjectIdentifier(\(raw: sequenceGenericParameter).self))
+                    hasher.combine(ObjectIdentifier(\(raw: collectionGenericParameter).self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
                     }
                 } else {
-                    hasher.combine(ObjectIdentifier(Optional<\(raw: sequenceGenericParameter)>.self))
+                    hasher.combine(ObjectIdentifier(Optional<\(raw: collectionGenericParameter)>.self))
                 }
                 """
         }
     }
 
     private var initFromDecoderBody: CodeBlockItemListSyntax {
-        let nonNilDecoding: CodeBlockItemListSyntax = if configuration.variant.contains(.sequence) {
+        let nonNilDecoding: CodeBlockItemListSyntax = if configuration.variant.contains(.collection) {
             """
             var container = try decoder.unkeyedContainer()
             var array = Array<any \(raw: configuration.protocolName)>()
@@ -459,7 +459,7 @@ private struct ExpansionBuilder {
                 let element = try container.decode(\(raw: conformanceComponent)\(raw: configuration.protocolName)<\(raw: typeCodingGenericParameter)>.self).wrappedValue
                 array.append(element)
             }
-            wrappedValue = \(raw: sequenceGenericParameter)(array)
+            wrappedValue = \(raw: collectionGenericParameter)(array)
             """
         } else {
             """
@@ -485,7 +485,7 @@ private struct ExpansionBuilder {
     }
 
     private var encodeToEncoderBody: CodeBlockItemListSyntax {
-        switch (configuration.variant.contains(.optional), configuration.variant.contains(.sequence)) {
+        switch (configuration.variant.contains(.optional), configuration.variant.contains(.collection)) {
             case (false, false):
                 """
                 try wrappedValue.encode(to: encoder)
@@ -524,10 +524,10 @@ private struct ExpansionBuilder {
     }
 
     private var docLineComment: String {
-        if configuration.conformance.equality != nil, configuration.variant.contains(.sequence) {
+        if configuration.conformance.equality != nil, configuration.variant.contains(.collection) {
             """
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `\(collectionGenericParameter)` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             """ + "\n"
         } else {
             ""

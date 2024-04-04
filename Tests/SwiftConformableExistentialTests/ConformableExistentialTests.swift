@@ -135,9 +135,9 @@ final class ConformableExistentialTests: XCTestCase {
             let decoded = try decoder.decode(decodableType, from: .sequenceOfSmallBeerAndDoubleEspresso)
             XCTAssertEqual(ObjectIdentifier(type(of: decoded)), opened(decodableType))
             if let wrappers = decoded as? any WrapsDrinkables, case let s = wrappers.wrappedValue as any Sequence<any Drinkable>, let drinkables = s as? [any Drinkable] {
-                XCTAssertEqual(EquatableSequenceOfDrinkable(wrappedValue: drinkables), EquatableSequenceOfDrinkable(wrappedValue: [Beer.smallBeer, Espresso.doubleEspresso]))
+                XCTAssertEqual(EquatableCollectionOfDrinkable(wrappedValue: drinkables), EquatableCollectionOfDrinkable(wrappedValue: [Beer.smallBeer, Espresso.doubleEspresso]))
             } else if let wrappers = decoded as? any WrapsOptionalDrinkables, case let s = wrappers.wrappedValue as (any Sequence<any Drinkable>)?, let drinkables = s as? [any Drinkable] {
-                XCTAssertEqual(EquatableSequenceOfDrinkable(wrappedValue: drinkables), EquatableSequenceOfDrinkable(wrappedValue: [Beer.smallBeer, Espresso.doubleEspresso]))
+                XCTAssertEqual(EquatableCollectionOfDrinkable(wrappedValue: drinkables), EquatableCollectionOfDrinkable(wrappedValue: [Beer.smallBeer, Espresso.doubleEspresso]))
             } else {
                 XCTFail()
             }

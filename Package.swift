@@ -5,7 +5,7 @@ import CompilerPluginSupport
 
 let package = Package(
     name: "swift-conformable-existential",
-    platforms: [.macOS(.v13), .iOS(.v13), .tvOS(.v13), .watchOS(.v6), .macCatalyst(.v13)],
+    platforms: [.macOS(.v14), .iOS(.v15), .tvOS(.v15), .watchOS(.v8), .macCatalyst(.v15)],
     products: [
         .library(
             name: "SwiftConformableExistential",

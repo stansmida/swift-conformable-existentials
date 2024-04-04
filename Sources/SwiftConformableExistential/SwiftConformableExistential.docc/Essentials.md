@@ -68,20 +68,20 @@ property wrappers:
 HashableDrinkable
 HashableMutableDrinkable
 HashableOptionalDrinkable
-HashableSequenceOfDrinkable<T> where T: Sequence<any Drinkable>
+HashableCollectionOfDrinkable<C> where C: Sequence<any Drinkable>
 HashableMutableOptionalDrinkable
-HashableMutableSequenceOfDrinkable<T> where T: Sequence<any Drinkable>
-HashableOptionalSequenceOfDrinkable<T> where T: Sequence<any Drinkable>
-HashableMutableOptionalSequenceOfDrinkable<T> where T: Sequence<any Drinkable>
+HashableMutableCollectionOfDrinkable<C> where C: Sequence<any Drinkable>
+HashableOptionalCollectionOfDrinkable<C> where C: Sequence<any Drinkable>
+HashableMutableOptionalCollectionOfDrinkable<C> where C: Sequence<any Drinkable>
 ```
 
 Collection variant wrappers are generic, allowing you to choose your specific collection type.
 
 ```swift
-@HashableSequenceOfDrinkable
+@HashableCollectionOfDrinkable
 var drinkablesArray: [any Drinkable]
 
-@HashableSequenceOfDrinkable
+@HashableCollectionOfDrinkable
 var drinkablesDeque: Deque<any Drinkable>
 ```
 
@@ -117,16 +117,16 @@ struct Container: Hashable, Codable {
     @HashableCodableMutableOptionalDrinkable<DrinkableTypeCoding>
     var mutableOptionalDrinkable: (any Drinkable)?
     
-    @HashableCodableRangeReplaceableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
+    @HashableCodableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
     var drinkables: [any Drinkable]
 
-    @HashableCodableMutableRangeReplaceableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
+    @HashableCodableMutableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
     var mutableDrinkables: [any Drinkable]
 
-    @HashableCodableOptionalRangeReplaceableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
+    @HashableCodableOptionalCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
     var optionalDrinkables: [any Drinkable]?
 
-    @HashableCodableMutableOptionalRangeReplaceableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
+    @HashableCodableMutableOptionalCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
     var mutableOptionalDrinkables: [any Drinkable]?
 }
 ```
@@ -175,9 +175,9 @@ let drinkablesSet = Set(drinkables.map({ HashableDrinkable($0) }))
 > `typealias`, achieving more concise spelling:
 > 
 > ```swift
-> typealias AnyDrinkables = HashableCodableRangeReplaceableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
+> typealias AnyDrinkables = HashableCodableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
 > // Or if you want to stick with just the type coding but not the collection type:
-> typealias AnyDrinkables<T> = HashableCodableRangeReplaceableCollectionOfDrinkable<T, DrinkableTypeCoding> where T: RangeReplaceableCollection<any Drinkable>
+> typealias AnyDrinkables<C> = HashableCodableCollectionOfDrinkable<C, DrinkableTypeCoding> where C: RangeReplaceableCollection<any Drinkable>
 > 
 > @AnyDrinkables 
 > var drinkables: [any Drinkable]
@@ -248,7 +248,7 @@ enum DrinkableTypeCoding: String, ProtocolMetatypeRepresentable {
 
 ```swift
 // Tip: Sugar your DrinkableTypeCoding codable wrappers
-typealias AnyDrinkables = HashableCodableRangeReplaceableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
+typealias AnyDrinkables = HashableCodableCollectionOfDrinkable<[any Drinkable], DrinkableTypeCoding>
 
 let data = try! encoder.encode(AnyDrinkables([Espresso(milliliters: 20.0), Water(milliliters: 250.0)]))
 print(String(data: data, encoding: .utf8)!)

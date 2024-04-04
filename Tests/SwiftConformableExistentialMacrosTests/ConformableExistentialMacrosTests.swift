@@ -74,21 +74,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T) {
+            struct EquatableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
             }
@@ -110,59 +110,59 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableMutableSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T) {
+            struct EquatableMutableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableOptionalSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T?) {
+            struct EquatableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableMutableOptionalSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T?) {
+            struct EquatableMutableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
             }
@@ -250,30 +250,30 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport, Hashable where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T) {
+            struct HashableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Hashable where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -301,30 +301,30 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableMutableSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport, Hashable where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T) {
+            struct HashableMutableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Hashable where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -332,62 +332,62 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableOptionalSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport, Hashable where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T?) {
+            struct HashableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Hashable where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableMutableOptionalSequenceOfDrinkable<T>: _ConformableExistentialEquatableSequenceSupport, Hashable where T: Sequence<any Drinkable> {
-                init(_ wrappedValue: T?) {
+            struct HashableMutableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Hashable where C: Sequence<any Drinkable> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
             }
@@ -472,14 +472,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct DecodableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Decodable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct DecodableCollectionOfDrinkable<C, TypeCoding>: Decodable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
@@ -490,10 +490,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
             }
 
@@ -520,14 +520,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct DecodableMutableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Decodable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct DecodableMutableCollectionOfDrinkable<C, TypeCoding>: Decodable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
@@ -538,22 +538,22 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
             }
 
             @propertyWrapper
-            struct DecodableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Decodable, _OptionalExistentialDecodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct DecodableOptionalCollectionOfDrinkable<C, TypeCoding>: Decodable, _OptionalExistentialDecodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
@@ -567,23 +567,23 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
             }
 
             @propertyWrapper
-            struct DecodableMutableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Decodable, _OptionalExistentialDecodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct DecodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: Decodable, _OptionalExistentialDecodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
@@ -597,10 +597,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
             }
@@ -686,14 +686,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct EncodableSequenceOfDrinkable<T, TypeCoding>: Encodable where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EncodableCollectionOfDrinkable<C, TypeCoding>: Encodable where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
@@ -731,14 +731,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct EncodableMutableSequenceOfDrinkable<T, TypeCoding>: Encodable where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EncodableMutableCollectionOfDrinkable<C, TypeCoding>: Encodable where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
@@ -753,14 +753,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct EncodableOptionalSequenceOfDrinkable<T, TypeCoding>: Encodable, _OptionalExistentialEncodingSupport where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EncodableOptionalCollectionOfDrinkable<C, TypeCoding>: Encodable, _OptionalExistentialEncodingSupport where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
@@ -780,14 +780,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct EncodableMutableOptionalSequenceOfDrinkable<T, TypeCoding>: Encodable, _OptionalExistentialEncodingSupport where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EncodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: Encodable, _OptionalExistentialEncodingSupport where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
@@ -903,14 +903,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct CodableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Codable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct CodableCollectionOfDrinkable<C, TypeCoding>: Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
@@ -921,10 +921,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
                 func encode(to encoder: Encoder) throws {
                     var container = encoder.unkeyedContainer()
@@ -968,14 +968,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct CodableMutableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Codable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct CodableMutableCollectionOfDrinkable<C, TypeCoding>: Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
@@ -986,10 +986,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
                 func encode(to encoder: Encoder) throws {
                     var container = encoder.unkeyedContainer()
@@ -1002,14 +1002,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct CodableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct CodableOptionalCollectionOfDrinkable<C, TypeCoding>: Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
@@ -1023,10 +1023,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1045,14 +1045,14 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct CodableMutableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct CodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
@@ -1066,10 +1066,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1175,21 +1175,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableDecodableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EquatableDecodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1199,10 +1199,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
             }
 
@@ -1231,21 +1231,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableDecodableMutableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EquatableDecodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1255,28 +1255,28 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableDecodableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable, _OptionalExistentialDecodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EquatableDecodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable, _OptionalExistentialDecodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1289,29 +1289,29 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableDecodableMutableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable, _OptionalExistentialDecodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EquatableDecodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Decodable, _OptionalExistentialDecodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1324,10 +1324,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
             }
@@ -1421,21 +1421,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableEncodableSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EquatableEncodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1474,21 +1474,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableEncodableMutableSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EquatableEncodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1501,21 +1501,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableEncodableOptionalSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable, _OptionalExistentialEncodingSupport where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EquatableEncodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable, _OptionalExistentialEncodingSupport where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1533,21 +1533,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableEncodableMutableOptionalSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable, _OptionalExistentialEncodingSupport where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EquatableEncodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Encodable, _OptionalExistentialEncodingSupport where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1670,21 +1670,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableCodableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EquatableCodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1694,10 +1694,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
                 func encode(to encoder: Encoder) throws {
                     var container = encoder.unkeyedContainer()
@@ -1743,21 +1743,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableCodableMutableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct EquatableCodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1767,10 +1767,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
                 func encode(to encoder: Encoder) throws {
                     var container = encoder.unkeyedContainer()
@@ -1782,21 +1782,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableCodableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EquatableCodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1809,10 +1809,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1830,21 +1830,21 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableCodableMutableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct EquatableCodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 init(from decoder: Decoder) throws {
@@ -1857,10 +1857,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1969,7 +1969,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -1983,25 +1983,25 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableEncodableSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct HashableEncodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -2037,7 +2037,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2051,25 +2051,25 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableEncodableMutableSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct HashableEncodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -2085,32 +2085,32 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableEncodableOptionalSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable, _OptionalExistentialEncodingSupport where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct HashableEncodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable, _OptionalExistentialEncodingSupport where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2128,32 +2128,32 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableEncodableMutableOptionalSequenceOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable, _OptionalExistentialEncodingSupport where T: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct HashableEncodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Encodable, _OptionalExistentialEncodingSupport where C: Sequence<any Drinkable>, TypeCoding: MetaEncoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2262,7 +2262,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2275,25 +2275,25 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableDecodableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct HashableDecodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -2306,10 +2306,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
             }
 
@@ -2333,7 +2333,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2346,25 +2346,25 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableDecodableMutableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct HashableDecodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -2377,39 +2377,39 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableDecodableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable, _OptionalExistentialDecodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct HashableDecodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable, _OptionalExistentialDecodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2422,40 +2422,40 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableDecodableMutableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable, _OptionalExistentialDecodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct HashableDecodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Decodable, _OptionalExistentialDecodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaDecoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2468,10 +2468,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
             }
@@ -2575,7 +2575,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2597,25 +2597,25 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct HashableCodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T
+                let wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -2628,10 +2628,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
                 func encode(to encoder: Encoder) throws {
                     var container = encoder.unkeyedContainer()
@@ -2663,7 +2663,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2685,25 +2685,25 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableMutableRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T) {
+            struct HashableCodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T) {
+                init(wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T
+                var wrappedValue: C
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
-                    hasher.combine(ObjectIdentifier(T.self))
+                    hasher.combine(ObjectIdentifier(C.self))
                     for element in wrappedValue {
                         hasher.combine(ObjectIdentifier(type(of: element)))
                         hasher.combine(element)
@@ -2716,10 +2716,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
+                        let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
                         array.append(element)
                     }
-                    wrappedValue = T(array)
+                    wrappedValue = C(array)
                 }
                 func encode(to encoder: Encoder) throws {
                     var container = encoder.unkeyedContainer()
@@ -2731,32 +2731,32 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct HashableCodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                let wrappedValue: T?
+                let wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2769,10 +2769,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2790,32 +2790,32 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                 }
             }
 
-            /// - Important: `T` must be an ordered sequence in order to correctly compare for equality.
-            /// See the documentation why and how to use your custom unordered sequences.
+            /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
+            /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableMutableOptionalRangeReplaceableCollectionOfDrinkable<T, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where T: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
-                init(_ wrappedValue: T?) {
+            struct HashableCodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+                init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                init(wrappedValue: T?) {
+                init(wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
-                var wrappedValue: T?
+                var wrappedValue: C?
                 var projectedValue: Self {
                     self
                 }
-                var _sequenceOfEquatables: T? {
+                var _sequenceOfEquatables: C? {
                     wrappedValue
                 }
                 func hash(into hasher: inout Hasher) {
                     if let wrappedValue {
-                        hasher.combine(ObjectIdentifier(T.self))
+                        hasher.combine(ObjectIdentifier(C.self))
                         for element in wrappedValue {
                             hasher.combine(ObjectIdentifier(type(of: element)))
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<T>.self))
+                        hasher.combine(ObjectIdentifier(Optional<C> .self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2828,10 +2828,10 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
+                            let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
                             array.append(element)
                         }
-                        wrappedValue = T(array)
+                        wrappedValue = C(array)
                     }
                 }
                 func encode(to encoder: Encoder) throws {

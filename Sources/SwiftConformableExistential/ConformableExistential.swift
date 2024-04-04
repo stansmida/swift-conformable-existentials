@@ -12,7 +12,7 @@ import SwiftSyntaxExtras
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Equatable`.
-@attached(peer, names: prefixed(Equatable), prefixed(EquatableMutable), prefixed(EquatableOptional), prefixed(EquatableSequenceOf), prefixed(EquatableMutableOptional), prefixed(EquatableMutableSequenceOf), prefixed(EquatableOptionalSequenceOf), prefixed(EquatableMutableOptionalSequenceOf))
+@attached(peer, names: prefixed(Equatable), prefixed(EquatableMutable), prefixed(EquatableOptional), prefixed(EquatableCollectionOf), prefixed(EquatableMutableOptional), prefixed(EquatableMutableCollectionOf), prefixed(EquatableOptionalCollectionOf), prefixed(EquatableMutableOptionalCollectionOf))
 public macro EquatableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "EquatableExistential")
@@ -22,7 +22,7 @@ public macro EquatableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Hashable`.
-@attached(peer, names: prefixed(Hashable), prefixed(HashableMutable), prefixed(HashableOptional), prefixed(HashableSequenceOf), prefixed(HashableMutableOptional), prefixed(HashableMutableSequenceOf), prefixed(HashableOptionalSequenceOf), prefixed(HashableMutableOptionalSequenceOf))
+@attached(peer, names: prefixed(Hashable), prefixed(HashableMutable), prefixed(HashableOptional), prefixed(HashableCollectionOf), prefixed(HashableMutableOptional), prefixed(HashableMutableCollectionOf), prefixed(HashableOptionalCollectionOf), prefixed(HashableMutableOptionalCollectionOf))
 public macro HashableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "HashableExistential")
@@ -32,7 +32,7 @@ public macro HashableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Decodable`.
-@attached(peer, names: prefixed(Decodable), prefixed(DecodableMutable), prefixed(DecodableOptional), prefixed(DecodableRangeReplaceableCollectionOf), prefixed(DecodableMutableOptional), prefixed(DecodableMutableRangeReplaceableCollectionOf), prefixed(DecodableOptionalRangeReplaceableCollectionOf), prefixed(DecodableMutableOptionalRangeReplaceableCollectionOf))
+@attached(peer, names: prefixed(Decodable), prefixed(DecodableMutable), prefixed(DecodableOptional), prefixed(DecodableCollectionOf), prefixed(DecodableMutableOptional), prefixed(DecodableMutableCollectionOf), prefixed(DecodableOptionalCollectionOf), prefixed(DecodableMutableOptionalCollectionOf))
 public macro DecodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "DecodableExistential")
@@ -42,7 +42,7 @@ public macro DecodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Encodable`.
-@attached(peer, names: prefixed(Encodable), prefixed(EncodableMutable), prefixed(EncodableOptional), prefixed(EncodableSequenceOf), prefixed(EncodableMutableOptional), prefixed(EncodableMutableSequenceOf), prefixed(EncodableOptionalSequenceOf), prefixed(EncodableMutableOptionalSequenceOf))
+@attached(peer, names: prefixed(Encodable), prefixed(EncodableMutable), prefixed(EncodableOptional), prefixed(EncodableCollectionOf), prefixed(EncodableMutableOptional), prefixed(EncodableMutableCollectionOf), prefixed(EncodableOptionalCollectionOf), prefixed(EncodableMutableOptionalCollectionOf))
 public macro EncodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "EncodableExistential")
@@ -52,7 +52,7 @@ public macro EncodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Codable`.
-@attached(peer, names: prefixed(Codable), prefixed(CodableMutable), prefixed(CodableOptional), prefixed(CodableRangeReplaceableCollectionOf), prefixed(CodableMutableOptional), prefixed(CodableMutableRangeReplaceableCollectionOf), prefixed(CodableOptionalRangeReplaceableCollectionOf), prefixed(CodableMutableOptionalRangeReplaceableCollectionOf))
+@attached(peer, names: prefixed(Codable), prefixed(CodableMutable), prefixed(CodableOptional), prefixed(CodableCollectionOf), prefixed(CodableMutableOptional), prefixed(CodableMutableCollectionOf), prefixed(CodableOptionalCollectionOf), prefixed(CodableMutableOptionalCollectionOf))
 public macro CodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "CodableExistential")
@@ -62,7 +62,7 @@ public macro CodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Equatable, Decodable`.
-@attached(peer, names: prefixed(EquatableDecodable), prefixed(EquatableDecodableMutable), prefixed(EquatableDecodableOptional), prefixed(EquatableDecodableRangeReplaceableCollectionOf), prefixed(EquatableDecodableMutableOptional), prefixed(EquatableDecodableMutableRangeReplaceableCollectionOf), prefixed(EquatableDecodableOptionalRangeReplaceableCollectionOf), prefixed(EquatableDecodableMutableOptionalRangeReplaceableCollectionOf))
+@attached(peer, names: prefixed(EquatableDecodable), prefixed(EquatableDecodableMutable), prefixed(EquatableDecodableOptional), prefixed(EquatableDecodableCollectionOf), prefixed(EquatableDecodableMutableOptional), prefixed(EquatableDecodableMutableCollectionOf), prefixed(EquatableDecodableOptionalCollectionOf), prefixed(EquatableDecodableMutableOptionalCollectionOf))
 public macro EquatableDecodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "EquatableDecodableExistential")
@@ -72,7 +72,7 @@ public macro EquatableDecodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Equatable, Encodable`.
-@attached(peer, names: prefixed(EquatableEncodable), prefixed(EquatableEncodableMutable), prefixed(EquatableEncodableOptional), prefixed(EquatableEncodableSequenceOf), prefixed(EquatableEncodableMutableOptional), prefixed(EquatableEncodableMutableSequenceOf), prefixed(EquatableEncodableOptionalSequenceOf), prefixed(EquatableEncodableMutableOptionalSequenceOf))
+@attached(peer, names: prefixed(EquatableEncodable), prefixed(EquatableEncodableMutable), prefixed(EquatableEncodableOptional), prefixed(EquatableEncodableCollectionOf), prefixed(EquatableEncodableMutableOptional), prefixed(EquatableEncodableMutableCollectionOf), prefixed(EquatableEncodableOptionalCollectionOf), prefixed(EquatableEncodableMutableOptionalCollectionOf))
 public macro EquatableEncodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "EquatableEncodableExistential")
@@ -82,7 +82,7 @@ public macro EquatableEncodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Equatable, Codable`.
-@attached(peer, names: prefixed(EquatableCodable), prefixed(EquatableCodableMutable), prefixed(EquatableCodableOptional), prefixed(EquatableCodableRangeReplaceableCollectionOf), prefixed(EquatableCodableMutableOptional), prefixed(EquatableCodableMutableRangeReplaceableCollectionOf), prefixed(EquatableCodableOptionalRangeReplaceableCollectionOf), prefixed(EquatableCodableMutableOptionalRangeReplaceableCollectionOf))
+@attached(peer, names: prefixed(EquatableCodable), prefixed(EquatableCodableMutable), prefixed(EquatableCodableOptional), prefixed(EquatableCodableCollectionOf), prefixed(EquatableCodableMutableOptional), prefixed(EquatableCodableMutableCollectionOf), prefixed(EquatableCodableOptionalCollectionOf), prefixed(EquatableCodableMutableOptionalCollectionOf))
 public macro EquatableCodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "EquatableCodableExistential")
@@ -92,7 +92,7 @@ public macro EquatableCodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Hashable, Decodable`.
-@attached(peer, names: prefixed(HashableDecodable), prefixed(HashableDecodableMutable), prefixed(HashableDecodableOptional), prefixed(HashableDecodableRangeReplaceableCollectionOf), prefixed(HashableDecodableMutableOptional), prefixed(HashableDecodableMutableRangeReplaceableCollectionOf), prefixed(HashableDecodableOptionalRangeReplaceableCollectionOf), prefixed(HashableDecodableMutableOptionalRangeReplaceableCollectionOf))
+@attached(peer, names: prefixed(HashableDecodable), prefixed(HashableDecodableMutable), prefixed(HashableDecodableOptional), prefixed(HashableDecodableCollectionOf), prefixed(HashableDecodableMutableOptional), prefixed(HashableDecodableMutableCollectionOf), prefixed(HashableDecodableOptionalCollectionOf), prefixed(HashableDecodableMutableOptionalCollectionOf))
 public macro HashableDecodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "HashableDecodableExistential")
@@ -102,7 +102,7 @@ public macro HashableDecodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Hashable, Encodable`.
-@attached(peer, names: prefixed(HashableEncodable), prefixed(HashableEncodableMutable), prefixed(HashableEncodableOptional), prefixed(HashableEncodableSequenceOf), prefixed(HashableEncodableMutableOptional), prefixed(HashableEncodableMutableSequenceOf), prefixed(HashableEncodableOptionalSequenceOf), prefixed(HashableEncodableMutableOptionalSequenceOf))
+@attached(peer, names: prefixed(HashableEncodable), prefixed(HashableEncodableMutable), prefixed(HashableEncodableOptional), prefixed(HashableEncodableCollectionOf), prefixed(HashableEncodableMutableOptional), prefixed(HashableEncodableMutableCollectionOf), prefixed(HashableEncodableOptionalCollectionOf), prefixed(HashableEncodableMutableOptionalCollectionOf))
 public macro HashableEncodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "HashableEncodableExistential")
@@ -112,7 +112,7 @@ public macro HashableEncodableExistential(
 /// - Parameters:
 ///   - accessModifier: Access level of the synthesized wrappers.
 /// - Requires: Annotated type must be a protocol that conforms to `Hashable, Codable`.
-@attached(peer, names: prefixed(HashableCodable), prefixed(HashableCodableMutable), prefixed(HashableCodableOptional), prefixed(HashableCodableRangeReplaceableCollectionOf), prefixed(HashableCodableMutableOptional), prefixed(HashableCodableMutableRangeReplaceableCollectionOf), prefixed(HashableCodableOptionalRangeReplaceableCollectionOf), prefixed(HashableCodableMutableOptionalRangeReplaceableCollectionOf))
+@attached(peer, names: prefixed(HashableCodable), prefixed(HashableCodableMutable), prefixed(HashableCodableOptional), prefixed(HashableCodableCollectionOf), prefixed(HashableCodableMutableOptional), prefixed(HashableCodableMutableCollectionOf), prefixed(HashableCodableOptionalCollectionOf), prefixed(HashableCodableMutableOptionalCollectionOf))
 public macro HashableCodableExistential(
     accessModifier: TypeAccessModifier? = nil
 ) = #externalMacro(module: "SwiftConformableExistentialMacros", type: "HashableCodableExistential")

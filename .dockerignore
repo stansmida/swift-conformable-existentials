@@ -1,0 +1,11 @@
+.build
+.dockerignore
+.git
+.gitignore
+.spi.yml
+.swiftpm
+Dockerfile
+docs/
+LICENSE
+Makefile
+README.md

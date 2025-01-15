@@ -149,7 +149,7 @@ private typealias EquatableOptionalCollectionOfDrinkableWrapper<T: Sequence<any 
 // These are then used to generate values (by the 4 protocols declaring init) to be used for equality checks
 // in 2 equatable categories (by the 2 protocols declaring equality).
 
-private var equatableDrinkableWrappers: [any EquatableDrinkableWrapper.Type] = [
+private let equatableDrinkableWrappers: [any EquatableDrinkableWrapper.Type] = [
     EquatableDrinkable.self,
     EquatableMutableDrinkable.self,
     HashableDrinkable.self,
@@ -187,7 +187,7 @@ private let equatableOptionalDrinkableWrappers: [any EquatableOptionalDrinkableW
     HashableCodableMutableOptionalDrinkable<DrinkableTypeCoding>.self,
 ]
 
-private func equatableCollectionOfDrinkableWrappers<T: RangeReplaceableCollection<any Drinkable>>(of _: T.Type) -> [any EquatableCollectionOfDrinkableWrapper<T>.Type] {
+private func equatableCollectionOfDrinkableWrappers<T: RangeReplaceableCollection<any Drinkable>>(of _: T.Type) -> [any EquatableCollectionOfDrinkableWrapper<T>.Type] where T: Sendable {
     [
         EquatableCollectionOfDrinkable<T>.self,
         EquatableMutableCollectionOfDrinkable<T>.self,
@@ -208,7 +208,7 @@ private func equatableCollectionOfDrinkableWrappers<T: RangeReplaceableCollectio
     ]
 }
 
-private func equatableOptionalCollectionOfDrinkableWrapper<T: RangeReplaceableCollection<any Drinkable>>(of _: T.Type) -> [any EquatableOptionalCollectionOfDrinkableWrapper<T>.Type] {
+private func equatableOptionalCollectionOfDrinkableWrapper<T: RangeReplaceableCollection<any Drinkable>>(of _: T.Type) -> [any EquatableOptionalCollectionOfDrinkableWrapper<T>.Type] where T: Sendable {
     [
         EquatableOptionalCollectionOfDrinkable<T>.self,
         EquatableMutableOptionalCollectionOfDrinkable<T>.self,
@@ -240,7 +240,7 @@ func equatablesOfDrinkable(value: (any Drinkable)?) -> [any _ConformableExistent
 }
 
 /// Generate all conformers of `_ConformableExistentialEquatableSequenceSupport` with given value.
-func equatablesOfDrinkables<T: RangeReplaceableCollection<any Drinkable>>(value: T?) -> [any _ConformableExistentialEquatableSequenceSupport] {
+func equatablesOfDrinkables<T: RangeReplaceableCollection<any Drinkable>>(value: T?) -> [any _ConformableExistentialEquatableSequenceSupport] where T: Sendable {
     var result = [any _ConformableExistentialEquatableSequenceSupport]()
     if let value {
         result.append(contentsOf: equatableCollectionOfDrinkableWrappers(of: T.self)
@@ -294,7 +294,7 @@ private func decodableOptionalDrinkableWrappers<C: MetaCoding<any Drinkable.Type
     ]
 }
 
-private func decodableCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any DecodableCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+private func decodableCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any DecodableCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
     [
         DecodableCollectionOfDrinkable<S, C>.self,
         DecodableMutableCollectionOfDrinkable<S, C>.self,
@@ -311,7 +311,7 @@ private func decodableCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.
     ]
 }
 
-private func decodableOptionalCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any DecodableOptionalCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+private func decodableOptionalCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any DecodableOptionalCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
     [
         DecodableOptionalCollectionOfDrinkable<S, C>.self,
         DecodableMutableOptionalCollectionOfDrinkable<S, C>.self,
@@ -362,7 +362,7 @@ private func encodableOptionalDrinkableWrappers<C: MetaCoding<any Drinkable.Type
     ]
 }
 
-private func encodableCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any EncodableCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+private func encodableCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any EncodableCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
     [
         EncodableCollectionOfDrinkable<S, C>.self,
         EncodableMutableCollectionOfDrinkable<S, C>.self,
@@ -379,7 +379,7 @@ private func encodableCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.
     ]
 }
 
-private func encodableOptionalCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any EncodableOptionalCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+private func encodableOptionalCollectionOfDrinkablesWrappers<S, C>(_: S.Type, with _: C.Type) -> [any EncodableOptionalCollectionOfDrinkableWrapper<S>.Type] where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
     [
         EncodableOptionalCollectionOfDrinkable<S, C>.self,
         EncodableMutableOptionalCollectionOfDrinkable<S, C>.self,
@@ -458,7 +458,7 @@ struct DecodablesOfOptionalDrinkable<C>: Decodable where C: MetaCoding<any Drink
     @HashableCodableMutableOptionalDrinkable<C> var d12: (any Drinkable)?
 }
 
-struct DecodablesOfDrinkables<S, C>: Decodable where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+struct DecodablesOfDrinkables<S, C>: Decodable where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
 
     init(_ drinkables: S) {
         _d1 = DecodableCollectionOfDrinkable<S, C>(wrappedValue: drinkables)
@@ -489,7 +489,7 @@ struct DecodablesOfDrinkables<S, C>: Decodable where S: RangeReplaceableCollecti
     @HashableCodableMutableCollectionOfDrinkable<S, C> var d12: S
 }
 
-struct DecodablesOfOptionalDrinkables<S, C>: Decodable where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+struct DecodablesOfOptionalDrinkables<S, C>: Decodable where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
 
     init(_ drinkables: S?) {
         _d1 = DecodableOptionalCollectionOfDrinkable<S, C>(wrappedValue: drinkables)
@@ -582,7 +582,7 @@ struct EncodablesOfOptionalDrinkable<C>: Encodable where C: MetaCoding<any Drink
     @HashableCodableMutableOptionalDrinkable<C> var d12: (any Drinkable)?
 }
 
-struct EncodablesOfDrinkables<S, C>: Encodable where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+struct EncodablesOfDrinkables<S, C>: Encodable where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
 
     init(_ drinkables: S) {
         _d1 = EncodableCollectionOfDrinkable<S, C>(wrappedValue: drinkables)
@@ -613,7 +613,7 @@ struct EncodablesOfDrinkables<S, C>: Encodable where S: RangeReplaceableCollecti
     @HashableCodableMutableCollectionOfDrinkable<S, C> var d12: S
 }
 
-struct EncodablesOfOptionalDrinkables<S, C>: Encodable where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+struct EncodablesOfOptionalDrinkables<S, C>: Encodable where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
 
     init(_ drinkables: S?) {
         _d1 = EncodableOptionalCollectionOfDrinkable<S, C>(wrappedValue: drinkables)
@@ -660,7 +660,7 @@ func decodablesOfDrinkables<S, C>(
     of _: S.Type,
     optionalsOnly: Bool,
     with _: C.Type
-) -> [any Decodable.Type] where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+) -> [any Decodable.Type] where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
     var result = [any Decodable.Type]()
     if !optionalsOnly {
         result.append(contentsOf: decodableCollectionOfDrinkablesWrappers(S.self, with: C.self))
@@ -684,7 +684,7 @@ func encodablesOfDrinkable<C: MetaCoding<any Drinkable.Type>>(
 func encodablesOfDrinkables<S, C>(
     value: S?,
     with _: C.Type
-) -> [any Encodable] where S: RangeReplaceableCollection<any Drinkable>, C: MetaCoding<any Drinkable.Type> {
+) -> [any Encodable] where S: RangeReplaceableCollection<any Drinkable>, S: Sendable, C: MetaCoding<any Drinkable.Type> {
     var result = [any Encodable]()
     if let value {
         result.append(contentsOf: encodableCollectionOfDrinkablesWrappers(S.self, with: C.self).map({ $0.init(wrappedValue: value) as any Encodable }))

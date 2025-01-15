@@ -159,6 +159,10 @@ fileprivate struct Configuration {
         let codability: Codability?
     }
 
+    enum ImplicitConformance: String {
+        case sendable = "Sendable"
+    }
+
     enum Variant {
         case mutable, optional, collection
     }
@@ -181,14 +185,15 @@ fileprivate struct Configuration {
         variant: Set<Configuration.Variant>
     ) throws {
         do {
-            let protocolDeclSyntax = try DeclSyntaxScanner(declSyntax: declaration)
-            guard case .protocol = protocolDeclSyntax.type else {
+            let declSyntaxType = try DeclSyntaxScanner(declSyntax: declaration)
+            guard case .protocol = declSyntaxType.type else {
                 throw Diagnostic.invalidDeclarationType(declaration, expected: [ProtocolDeclSyntax.self]).error(at: node)
             }
             self.node = node
             self.accessModifier = try TypeAccessModifier(withLabel: "accessModifier", in: declaration, at: node)
-            self.protocolName = try protocolDeclSyntax.name
+            self.protocolName = try declSyntaxType.name
             self.conformance = conformance
+            self.implicitConformance = try declSyntaxType.inheritedTypes?.contains(ImplicitConformance.sendable.rawValue) == true ? [.sendable] : []
             self.variant = variant
         } catch {
             throw error.diagnosticError(at: node)
@@ -199,6 +204,7 @@ fileprivate struct Configuration {
     let accessModifier: TypeAccessModifier?
     let protocolName: String
     let conformance: Conformance
+    let implicitConformance: [ImplicitConformance]
     let variant: Set<Variant>
 }
 
@@ -317,6 +323,9 @@ private struct ExpansionBuilder {
                 }
             }
         }
+        for implicitConformance in configuration.implicitConformance {
+            conformances.append(implicitConformance.rawValue)
+        }
         if conformances.isEmpty {
             return ""
         } else {
@@ -328,6 +337,9 @@ private struct ExpansionBuilder {
         var constraints = [String]()
         if configuration.variant.contains(.collection) {
             constraints.append("\(collectionGenericParameter): \(collectionType)<any \(configuration.protocolName)>")
+            if configuration.implicitConformance.contains(.sendable) {
+                constraints.append("\(collectionGenericParameter): \(Configuration.ImplicitConformance.sendable.rawValue)")
+            }
         }
         if let codability = configuration.conformance.codability {
             let coding = switch codability {

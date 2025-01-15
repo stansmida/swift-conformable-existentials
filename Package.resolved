@@ -1,4 +1,5 @@
 {
+  "originHash" : "820730f30fcfe6dabfebdbd55c1210aca14fecef0708dfe6d56d2c2f4b61ae75",
   "pins" : [
     {
       "identity" : "swift-docc-plugin",
@@ -23,8 +24,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stansmida/swift-extras.git",
       "state" : {
-        "revision" : "beced210c6290dcff1c0aefbce2ea572c4691e13",
-        "version" : "0.7.4"
+        "revision" : "fec52ce3f4c43cdbd5fde6b13a9535a950880ad3",
+        "version" : "0.7.5"
       }
     },
     {
@@ -32,8 +33,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-syntax.git",
       "state" : {
-        "revision" : "fa8f95c2d536d6620cc2f504ebe8a6167c9fc2dd",
-        "version" : "510.0.1"
+        "revision" : "0687f71944021d616d34d922343dcef086855920",
+        "version" : "600.0.1"
       }
     },
     {
@@ -41,10 +42,10 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stansmida/swift-syntax-extras.git",
       "state" : {
-        "revision" : "4e0bd379872338faef471b16c0df537718b5d304",
-        "version" : "0.5.0"
+        "revision" : "7f42cd8be9f1433a9bfd5b2b44effe1cd8a1f02c",
+        "version" : "0.6.0"
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

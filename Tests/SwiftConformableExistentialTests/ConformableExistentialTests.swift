@@ -456,6 +456,9 @@ private extension Data {
         """
         {
           "d1" : null,
+          "d10" : null,
+          "d11" : null,
+          "d12" : null,
           "d2" : null,
           "d3" : null,
           "d4" : null,
@@ -463,10 +466,7 @@ private extension Data {
           "d6" : null,
           "d7" : null,
           "d8" : null,
-          "d9" : null,
-          "d10" : null,
-          "d11" : null,
-          "d12" : null
+          "d9" : null
         }
         """.data(using: .utf8)!
 
@@ -482,6 +482,18 @@ private extension Data {
         """
         {
           "d1" : {
+            "__type" : "water",
+            "milliliters" : 250
+          },
+          "d10" : {
+            "__type" : "water",
+            "milliliters" : 250
+          },
+          "d11" : {
+            "__type" : "water",
+            "milliliters" : 250
+          },
+          "d12" : {
             "__type" : "water",
             "milliliters" : 250
           },
@@ -516,18 +528,6 @@ private extension Data {
           "d9" : {
             "__type" : "water",
             "milliliters" : 250
-          },
-          "d10" : {
-            "__type" : "water",
-            "milliliters" : 250
-          },
-          "d11" : {
-            "__type" : "water",
-            "milliliters" : 250
-          },
-          "d12" : {
-            "__type" : "water",
-            "milliliters" : 250
           }
         }
         """.data(using: .utf8)!
@@ -550,6 +550,36 @@ private extension Data {
         """
         {
           "d1" : [
+            {
+              "__type" : "water",
+              "milliliters" : 250
+            },
+            {
+              "__type" : "beer",
+              "milliliters" : 300
+            }
+          ],
+          "d10" : [
+            {
+              "__type" : "water",
+              "milliliters" : 250
+            },
+            {
+              "__type" : "beer",
+              "milliliters" : 300
+            }
+          ],
+          "d11" : [
+            {
+              "__type" : "water",
+              "milliliters" : 250
+            },
+            {
+              "__type" : "beer",
+              "milliliters" : 300
+            }
+          ],
+          "d12" : [
             {
               "__type" : "water",
               "milliliters" : 250
@@ -630,36 +660,6 @@ private extension Data {
             }
           ],
           "d9" : [
-            {
-              "__type" : "water",
-              "milliliters" : 250
-            },
-            {
-              "__type" : "beer",
-              "milliliters" : 300
-            }
-          ],
-          "d10" : [
-            {
-              "__type" : "water",
-              "milliliters" : 250
-            },
-            {
-              "__type" : "beer",
-              "milliliters" : 300
-            }
-          ],
-          "d11" : [
-            {
-              "__type" : "water",
-              "milliliters" : 250
-            },
-            {
-              "__type" : "beer",
-              "milliliters" : 300
-            }
-          ],
-          "d12" : [
             {
               "__type" : "water",
               "milliliters" : 250

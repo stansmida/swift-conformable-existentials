@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.0
 
 import PackageDescription
 import CompilerPluginSupport
@@ -14,10 +14,9 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0"),
-        // Depend on the Swift 5.9 release of SwiftSyntax
-        .package(url: "https://github.com/apple/swift-syntax.git", from: "510.0.0"),
-        .package(url: "https://github.com/stansmida/swift-extras.git", from: "0.7.4"),
-        .package(url: "https://github.com/stansmida/swift-syntax-extras.git", from: "0.5.0"),
+        .package(url: "https://github.com/apple/swift-syntax.git", from: "600.0.0"),
+        .package(url: "https://github.com/stansmida/swift-extras.git", from: "0.7.5"),
+        .package(url: "https://github.com/stansmida/swift-syntax-extras.git", from: "0.6.0"),
     ],
     targets: [
 

@@ -14,17 +14,17 @@ final class ConformableExistentialMacrosTests: XCTestCase {
         assertMacroExpansion(
             """
             @EquatableExistential
-            protocol Drinkable: Equatable {
+            protocol Drinkable: Equatable, Sendable {
                 var milliliters: Double { get }
             }
             """,
             expandedSource: """
-            protocol Drinkable: Equatable {
+            protocol Drinkable: Equatable, Sendable {
                 var milliliters: Double { get }
             }
 
             @propertyWrapper
-            struct EquatableDrinkable: _ConformableExistentialEquatableSupport {
+            struct EquatableDrinkable: _ConformableExistentialEquatableSupport, Sendable {
                 init(_ wrappedValue: any Drinkable) {
                     self.wrappedValue = wrappedValue
                 }
@@ -41,7 +41,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct EquatableMutableDrinkable: _ConformableExistentialEquatableSupport {
+            struct EquatableMutableDrinkable: _ConformableExistentialEquatableSupport, Sendable {
                 init(_ wrappedValue: any Drinkable) {
                     self.wrappedValue = wrappedValue
                 }
@@ -58,7 +58,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct EquatableOptionalDrinkable: _ConformableExistentialEquatableSupport {
+            struct EquatableOptionalDrinkable: _ConformableExistentialEquatableSupport, Sendable {
                 init(_ wrappedValue: (any Drinkable)?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -77,7 +77,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+            struct EquatableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Sendable where C: Sequence<any Drinkable>, C: Sendable {
                 init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
@@ -94,7 +94,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct EquatableMutableOptionalDrinkable: _ConformableExistentialEquatableSupport {
+            struct EquatableMutableOptionalDrinkable: _ConformableExistentialEquatableSupport, Sendable {
                 init(_ wrappedValue: (any Drinkable)?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -113,7 +113,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableMutableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+            struct EquatableMutableCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Sendable where C: Sequence<any Drinkable>, C: Sendable {
                 init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
@@ -132,7 +132,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+            struct EquatableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Sendable where C: Sequence<any Drinkable>, C: Sendable {
                 init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -151,7 +151,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct EquatableMutableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport where C: Sequence<any Drinkable> {
+            struct EquatableMutableOptionalCollectionOfDrinkable<C>: _ConformableExistentialEquatableSequenceSupport, Sendable where C: Sequence<any Drinkable>, C: Sendable {
                 init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -250,7 +250,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
             }
@@ -301,7 +301,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
             }
@@ -357,7 +357,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
             }
@@ -387,7 +387,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
             }
@@ -490,7 +490,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -538,7 +538,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -567,7 +567,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -597,7 +597,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(DecodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(DecodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -921,7 +921,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -986,7 +986,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -1023,7 +1023,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -1066,7 +1066,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(CodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(CodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -1199,7 +1199,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -1255,7 +1255,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -1289,7 +1289,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -1324,7 +1324,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(EquatableDecodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -1694,7 +1694,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -1767,7 +1767,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -1809,7 +1809,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -1857,7 +1857,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(EquatableCodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -1969,7 +1969,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2037,7 +2037,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2110,7 +2110,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2153,7 +2153,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
                 func encode(to encoder: Encoder) throws {
@@ -2262,7 +2262,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2306,7 +2306,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -2333,7 +2333,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2377,7 +2377,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -2409,7 +2409,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2422,7 +2422,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -2455,7 +2455,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2468,7 +2468,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(HashableDecodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -2488,17 +2488,17 @@ final class ConformableExistentialMacrosTests: XCTestCase {
         assertMacroExpansion(
             """
             @HashableCodableExistential
-            protocol Drinkable: Hashable, Codable {
+            protocol Drinkable: Hashable, Codable, Sendable {
                 var milliliters: Double { get }
             }
             """,
             expandedSource: """
-            protocol Drinkable: Hashable, Codable {
+            protocol Drinkable: Hashable, Codable, Sendable {
                 var milliliters: Double { get }
             }
 
             @propertyWrapper
-            struct HashableCodableDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable where TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable, Sendable where TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: any Drinkable) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2527,7 +2527,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct HashableCodableMutableDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable where TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableMutableDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable, Sendable where TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: any Drinkable) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2556,7 +2556,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct HashableCodableOptionalDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableOptionalDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport, Sendable where TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: (any Drinkable)?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2575,7 +2575,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2600,7 +2600,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, Sendable where C: RangeReplaceableCollection<any Drinkable>, C: Sendable, TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2628,7 +2628,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -2644,7 +2644,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             }
 
             @propertyWrapper
-            struct HashableCodableMutableOptionalDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableMutableOptionalDrinkable<TypeCoding>: _ConformableExistentialEquatableSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport, Sendable where TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: (any Drinkable)?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2663,7 +2663,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         hasher.combine(ObjectIdentifier(type(of: wrappedValue)))
                         hasher.combine(wrappedValue)
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<any Drinkable> .self))
+                        hasher.combine(ObjectIdentifier(Optional<any Drinkable>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2688,7 +2688,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableMutableCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, Sendable where C: RangeReplaceableCollection<any Drinkable>, C: Sendable, TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: C) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2716,7 +2716,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                         array.reserveCapacity(count)
                     }
                     while !container.isAtEnd {
-                        let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
+                        let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
                         array.append(element)
                     }
                     wrappedValue = C(array)
@@ -2734,7 +2734,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport, Sendable where C: RangeReplaceableCollection<any Drinkable>, C: Sendable, TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2756,7 +2756,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2769,7 +2769,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)
@@ -2793,7 +2793,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
             /// - Important: `C` must be an ordered collection in order to correctly compare for equality.
             /// See the documentation why and how to use your custom unordered collections.
             @propertyWrapper
-            struct HashableCodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport where C: RangeReplaceableCollection<any Drinkable>, TypeCoding: MetaCoding<any Drinkable.Type> {
+            struct HashableCodableMutableOptionalCollectionOfDrinkable<C, TypeCoding>: _ConformableExistentialEquatableSequenceSupport, Hashable, Codable, _OptionalExistentialDecodingSupport, _OptionalExistentialEncodingSupport, Sendable where C: RangeReplaceableCollection<any Drinkable>, C: Sendable, TypeCoding: MetaCoding<any Drinkable.Type> {
                 init(_ wrappedValue: C?) {
                     self.wrappedValue = wrappedValue
                 }
@@ -2815,7 +2815,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             hasher.combine(element)
                         }
                     } else {
-                        hasher.combine(ObjectIdentifier(Optional<C> .self))
+                        hasher.combine(ObjectIdentifier(Optional<C>.self))
                     }
                 }
                 init(from decoder: Decoder) throws {
@@ -2828,7 +2828,7 @@ final class ConformableExistentialMacrosTests: XCTestCase {
                             array.reserveCapacity(count)
                         }
                         while !container.isAtEnd {
-                            let element = try container.decode(HashableCodableDrinkable<TypeCoding> .self).wrappedValue
+                            let element = try container.decode(HashableCodableDrinkable<TypeCoding>.self).wrappedValue
                             array.append(element)
                         }
                         wrappedValue = C(array)

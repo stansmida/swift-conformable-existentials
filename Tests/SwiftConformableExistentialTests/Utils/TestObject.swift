@@ -12,7 +12,7 @@ import SwiftConformableExistential
 @HashableEncodableExistential
 @HashableDecodableExistential
 @HashableCodableExistential
-protocol Drinkable: Codable, Hashable {
+protocol Drinkable: Codable, Hashable, Sendable {
     var milliliters: Double { get }
 }
 
